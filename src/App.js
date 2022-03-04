@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import imge from './img.jpg'
+import html2canvas from 'html2canvas'
 
 function App() {
+  const saveImage = async () => {
+    const canvas = await html2canvas(document.querySelector("#app"))
+    const dataURL = canvas.toDataURL()
+    let link = document.createElement("a")
+    link.download = "name"
+    link.href = dataURL
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="app" id="app">
+        <img src={imge} className="img" alt="preview" />
+        <div className="text">there is only one truth; rest are conjectures.</div>
+      </div>
+      <button onClick={saveImage}>save</button>
+    </>
   );
 }
 

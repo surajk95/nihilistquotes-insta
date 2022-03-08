@@ -11,6 +11,9 @@
 # production
 /build
 
+# keys
+/src/unsplashkey.js
+
 # misc
 .DS_Store
 .env.local

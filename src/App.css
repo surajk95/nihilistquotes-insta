@@ -7,11 +7,13 @@
   width: 800px;
   height: 600px;
   margin: auto;
+  background: black;
 }
 .app img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.2;
 }
 .text {
   position: absolute;
@@ -21,4 +23,15 @@
   font-weight: 700;
   font-size: 30px;
   padding: 15px;
+  letter-spacing: 8px;
+  text-decoration: line-through;
+  color: #deb887;
+  text-decoration-thickness: 1px;
+}
+.watermark {
+  font-size: 12px;
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  opacity: 0.5;
 }

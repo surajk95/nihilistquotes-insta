@@ -1,28 +1,11 @@
 import './App.css';
-import imge from './img.jpg'
+import imge from './gold-contour.png'
 import html2canvas from 'html2canvas'
-import { createApi } from "unsplash-js"
-import { unsplashKey } from './unsplashkey';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import { quotes } from './quotes'
-
-const api = createApi({
-  // Don't forget to set your access token here!
-  // See https://unsplash.com/developers
-  accessKey: unsplashKey
-})
 
 function App() {
   const [config, setConfig] = useState({shouldGenerate: true, index: 0})
-
-  // useEffect(() => {
-  //   const imageContainer = document.querySelector(`#unsplashImage`)
-  //   imageContainer.addEventListener(`load`, onImageLoad)
-
-  //   return (() => {
-  //     imageContainer.removeEventListener(`load`, onImageLoad)
-  //   })
-  // }, [])
 
   const onImageLoad = async () => {
     console.log(`onimageload`, config)
@@ -59,15 +42,27 @@ function App() {
     //saveImage()
   }
 
-  const saveImage = async () => {
-    const imageResult = await api.photos.getRandom({ query: "dark mountain mountains hills landscape", orientation: "landscape", count: 1 })
-    if(imageResult.type!=='success') {
-      console.log(`failed to fetch unsplash`)
+  const saveImage = async (i) => {
+    const currentQuote = quotes[i]
+    const quoteContainer = document.querySelector(`#text`)
+    quoteContainer.innerHTML = currentQuote
+
+    const canvas = await html2canvas(document.querySelector("#app"))
+    const dataURL = canvas.toDataURL()
+    //console.log(`zzzgeneratedurl`, dataURL)
+    let link = document.createElement("a")
+    link.download = `#nihilistquotes #quotes #nihilist #quote #love #art #feelings #sad #me #philosophy #app #thoughts #instagram #fashion #photooftheday #thoughtoftheday ${i}`
+    link.href = dataURL
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  const initDownload = () => {
+    for(let i=35; i<quotes.length; i++) {
+      console.log(`zzz`, i)
+      saveImage(i)
     }
-    const res = imageResult?.response[0]?.urls?.regular
-    console.log(`zzzimageurl`, res)
-    const imageContainer = document.querySelector(`#unsplashImage`)
-    imageContainer.src = res
   }
 
 
@@ -77,8 +72,9 @@ function App() {
       <div className="app" id="app">
         <img src={imge} className="img" id="unsplashImage" alt="preview" onLoad={onImageLoad} />
         <div className="text" id="text">initial quote. this won't download.</div>
+        <div className="watermark">nihilistquotes</div>
       </div>
-      <button onClick={saveImage}>save</button>
+      <button onClick={initDownload}>save</button>
     </>
   );
 }

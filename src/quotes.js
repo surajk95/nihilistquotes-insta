@@ -31,4 +31,12 @@ export const quotes = [
     `Knowledge and perspective are inseparable.`,
     `The only upshot of life is the transmission of knowledge.`,
     `Beat around the bush all you want, but consistency and discipline top spurts of inspiration any day.`,
+    `blue is blue.`,
+    `Experience is wisdom.`,
+    `It's about beating the biological machine.`,
+    `Gotta tunnel vision on the grand idea. `,
+    `Empathy is an apparition.`,
+    `Your time is now.`,
+    `Making a living three fourths of your life is ridiculous.`,
+    `Great minds talk about ideas, average minds talk about events, small minds talk about people.`,
 ] 
